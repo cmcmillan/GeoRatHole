@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+ <project default="build">
+
+  <dirname property="basedir" file="${ant.file}"/>
+
+  <property name="beanname" value="SimpleBean"/>
+  <property name="jarfile" value="${basedir}/${beanname}.jar"/>
+
+  <target name="build" depends="compile">
+      <jar destfile="${jarfile}" basedir="${basedir}" includes="*.class">
+          <manifest>
+              <section name="${beanname}.class">
+                 <attribute name="Java-Bean" value="true"/>
+              </section>
+          </manifest>
+      </jar>
+  </target>
+
+  <target name="compile">
+      <javac destdir="${basedir}">
+          <src location="${basedir}"/>
+      </javac>
+  </target>
+
+  <target name="clean">
+      <delete file="${jarfile}">
+          <fileset dir="${basedir}" includes="*.class"/>
+      </delete>
+  </target>
+
+</project> 
